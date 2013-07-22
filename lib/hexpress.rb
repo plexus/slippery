@@ -4,29 +4,25 @@ require 'hexp'
 # Hexpress namespace module
 module Hexpress
   def self.convert(element)
-    type, value, attr, children, options =
-      element.type, element.value, element.attr, element.children, element.options
-    #attr = attr.merge(element.options)
-    case type
-    when :root
-      H[:html, H[:body, attr, convert_children(children)]]
-    when :text
-      Hexp::TextNode.new(value)
-    when :codespan
-      Hexp::TextNode.new(value)
-    when :blank
-    when :header
-      H["h#{options[:level]}".intern, attr, convert_children(children)]
-    else
-      H[type, attr, convert_children(children)]
+    Hexpress::Converter.new.convert(element)
+  end
+end
+
+# Core extension
+class Class
+  unless defined?(private_attr_accessor)
+    # Like attr_accessor, but only available inside the class
+    #
+    # @param args [Array<Symbol>] The attributes to define
+    # @api private
+    #
+    def private_attr_accessor(*args)
+      attr_accessor(*args)
+      private(*args)
+      private(*args.map {|method| "#{method}=".intern })
     end
   end
-
-  def self.convert_children(children)
-    children.map {|ch| self.convert ch}.compact
-  end
-
-
 end
 
 require 'hexpress/version'
+require 'hexpress/converter'

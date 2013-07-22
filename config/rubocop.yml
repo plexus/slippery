@@ -31,3 +31,41 @@ CollectionMethods:
 # to scan the code and see where the sections are.
 AccessControl:
   Enabled: false
+
+LineLength:
+  Enabled: true
+  Max: 80
+
+# Avoid methods longer than 30 lines of code
+MethodLength:
+  Max: 3
+
+# Rubocop doesn't allow fine grained per method/class disabling of checks.
+# so I'm disabling all the ones that disagree with me *somewhere*
+
+# I mostly agree with this cop, except that { |arg| ... } looks very wrong to
+# me. I prefer {|arg| ... } in that case .
+SpaceAroundBraces:
+  Enabled: false
+
+# Align the parameters of a method call if they span more than one line.
+AlignParameters:
+  Enabled: false
+
+# Checks for uses of Module#attr.
+#
+# This is also triggered by instance methods named attr
+Attr:
+  Enabled: false
+
+# Document classes and non-namespace modules.
+#
+# The Hexpress module is repeated many times, but only documented in hexpress.rb
+Documentation:
+  Enabled: false
+
+# The use of eval represents a serious security risk.
+#
+# Eval is used in the Gemfile to load Devtools
+Eval:
+  Enabled: false

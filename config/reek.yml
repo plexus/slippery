@@ -1,6 +1,6 @@
 ---
 Attribute:
-  enabled: true
+  enabled: false
   exclude:
   - Devtools::Config
   - Devtools::Project
