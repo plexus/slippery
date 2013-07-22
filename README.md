@@ -14,3 +14,5 @@ Hexpress
 --------
 
 The most flexible, customizable way to generate slides from Markdown.
+
+This is work in progress.
