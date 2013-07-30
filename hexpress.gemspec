@@ -10,6 +10,7 @@ Gem::Specification.new do |gem|
   gem.description = 'Make presentations with Markdown'
   gem.summary     = gem.description
   gem.homepage    = 'https://github.com/plexus/hexpress'
+  gem.license     = 'MIT'
 
   gem.require_paths    = %w[lib]
   gem.files            = `git ls-files`.split($/)
