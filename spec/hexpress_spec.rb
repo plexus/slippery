@@ -77,4 +77,18 @@ describe Hexpress, 'convert' do
               H[:li, H[:p, 'guava']]]]))
     end
   end
+
+  describe 'ordered lists' do
+    let(:fixture) { 'ordered_list' }
+
+    specify do
+      expect(hexp).to eq(
+        html(
+          H[:ol, [
+              H[:li, H[:p, 'ninjas']],
+              H[:li, H[:p, 'pirates']],
+              H[:li, H[:p, 'sales people']]]]))
+    end
+  end
+
 end
