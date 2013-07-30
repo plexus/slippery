@@ -4,13 +4,14 @@ describe Hexpress, 'convert' do
   subject(:hexp)  { converter.convert(document.root) }
   let(:document)  { Kramdown::Document.new(markdown) }
   let(:converter) { Class.new(Hexpress::Converter) { def blank ; end }.new }
+  let(:markdown)  { load_fixture(fixture) }
 
   def html(*children)
     H[:html, H[:body, children]]
   end
 
   context 'with a header and a paragraph' do
-    let(:markdown) { load_fixture('header_and_paragraph') }
+    let(:fixture) { 'header_and_paragraph' }
 
     it 'turns a Kramdown document into a Hexp' do
       expect(hexp).to eq(
@@ -21,7 +22,7 @@ describe Hexpress, 'convert' do
   end
 
   context 'heading styles and levels' do
-    let(:markdown) { load_fixture('headers') }
+    let(:fixture) { 'headers' }
 
     it 'knows about all kinds of headings' do
       expect(hexp).to eq(
@@ -36,7 +37,7 @@ describe Hexpress, 'convert' do
   end
 
   describe 'blockquote' do
-    let(:markdown) { load_fixture('blockquotes') }
+    let(:fixture) { 'blockquotes' }
 
     it 'understands block quotes' do
       expect(hexp).to eq(
@@ -52,15 +53,28 @@ describe Hexpress, 'convert' do
   end
 
   describe 'code_blocks' do
-    let(:markdown) { load_fixture('code_blocks') }
+    let(:fixture) { 'code_blocks' }
 
     it 'understands code blocks' do
       expect(hexp).to eq(
         html(
-          H[:pre, ["an indented code block\n"]],
-          H[:pre, ["a fenced code block\n"]],
-          H[:pre, { 'class' => 'language-ruby' },
-                  ["code block with language specifier\n"]]))
+          H[:pre, H[:code, ["an indented code block\n"]]],
+          H[:pre, H[:code, ["a fenced code block\n"]]],
+          H[:pre, { 'class' => 'language-ruby' }, H[:code,
+                  ["code block with language specifier\n"]]]))
+    end
+  end
+
+  describe 'unorderd lists' do
+    let(:fixture) { 'unordered_list' }
+
+    specify do
+      expect(hexp).to eq(
+        html(
+          H[:ul, [
+              H[:li, H[:p, 'banana']],
+              H[:li, H[:p, 'apple']],
+              H[:li, H[:p, 'guava']]]]))
     end
   end
 end

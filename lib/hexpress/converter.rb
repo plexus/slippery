@@ -49,7 +49,7 @@ class Hexpress::Converter
   # @api semipublic
   #
   def codeblock
-    H[:pre, attr, value]
+    H[:pre, attr, H[:code, value]]
   end
 
   # Create a Hexp::Node from the current element
@@ -72,7 +72,7 @@ class Hexpress::Converter
     end
   end
 
-  [:p, :blockquote].each do |sym|
+  [:p, :blockquote, :ul, :li].each do |sym|
     define_method sym do
       tag! type
     end

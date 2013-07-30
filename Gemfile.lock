@@ -34,7 +34,7 @@ PATH
 PATH
   remote: /home/arne/github/hexp
   specs:
-    hexp (0.1.0)
+    hexp (0.2.0)
       equalizer (~> 0.0)
       ice_nine (~> 0.8)
       nokogiri (~> 1.6)
