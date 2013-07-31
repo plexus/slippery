@@ -72,7 +72,7 @@ class Hexpress::Converter
     end
   end
 
-  [:p, :blockquote, :ul, :li, :ol].each do |sym|
+  [:p, :blockquote, :ul, :li, :ol, :dl, :dt, :dd].each do |sym|
     define_method sym do
       tag! type
     end

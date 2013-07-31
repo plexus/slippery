@@ -10,84 +10,57 @@ describe Hexpress, 'convert' do
     H[:html, H[:body, children]]
   end
 
-  context 'with a header and a paragraph' do
-    let(:fixture) { 'header_and_paragraph' }
+  SPECS = {
+    'header_and_paragraph' => [
+      H[:h1, 'Hello, World!'],
+      H[:p, 'This is a paragraph.']
+    ],
+    'headers' => [
+      H[:h1, 'Level 1'],
+      H[:h2, 'Level 2'],
+      H[:h3, 'Level 3'],
+      H[:h1, 'Level 1 again'],
+      H[:h2, 'Level 2'],
+      H[:h6, 'Level 6']
+    ],
+    'blockquotes' => [
+      H[:blockquote, [
+          H[:p, 'This is a block quote'],
+          H[:p, 'With two paragraphs']
+        ]],
+      H[:blockquote, [
+          H[:p, "This is a second block quote\nthat is hand-wrapped"]
+        ]]
+    ],
+    'code_blocks' => [
+      H[:pre, [H[:code, ["an indented code block\n"]]]],
+      H[:pre, [H[:code, ["a fenced code block\n"]]]],
+      H[:pre, { 'class' => 'language-ruby' }, [H[:code,
+          ["code block with language specifier\n"]]]]
+    ],
+    'unordered_list' => [
+      H[:ul, [
+          H[:li, [H[:p, 'banana']]],
+          H[:li, [H[:p, 'apple']]],
+          H[:li, [H[:p, 'guava']]]]]
+    ],
+    'ordered_list' => [
+      H[:ol, [
+          H[:li, [H[:p, 'ninjas']]],
+          H[:li, [H[:p, 'pirates']]],
+          H[:li, [H[:p, 'sales people']]]]]
+    ],
+    'definition_lists' => [
+      H[:dl, [
+          H[:dt, ["Jabberwocky"]],
+          H[:dd, [H[:p, "mythical beast of poetic proportions"]]]]]
+    ]
+  }
 
-    it 'turns a Kramdown document into a Hexp' do
-      expect(hexp).to eq(
-        html(
-          H[:h1, 'Hello, World!'],
-          H[:p, 'This is a paragraph.']))
-    end
-  end
-
-  context 'heading styles and levels' do
-    let(:fixture) { 'headers' }
-
-    it 'knows about all kinds of headings' do
-      expect(hexp).to eq(
-        html(
-          H[:h1, 'Level 1'],
-          H[:h2, 'Level 2'],
-          H[:h3, 'Level 3'],
-          H[:h1, 'Level 1 again'],
-          H[:h2, 'Level 2'],
-          H[:h6, 'Level 6']))
-    end
-  end
-
-  describe 'blockquote' do
-    let(:fixture) { 'blockquotes' }
-
-    it 'understands block quotes' do
-      expect(hexp).to eq(
-        html(
-          H[:blockquote, [
-              H[:p, 'This is a block quote'],
-              H[:p, 'With two paragraphs']
-            ]],
-          H[:blockquote, [
-              H[:p, "This is a second block quote\nthat is hand-wrapped"]
-            ]]))
-    end
-  end
-
-  describe 'code_blocks' do
-    let(:fixture) { 'code_blocks' }
-
-    it 'understands code blocks' do
-      expect(hexp).to eq(
-        html(
-          H[:pre, H[:code, ["an indented code block\n"]]],
-          H[:pre, H[:code, ["a fenced code block\n"]]],
-          H[:pre, { 'class' => 'language-ruby' }, H[:code,
-                  ["code block with language specifier\n"]]]))
-    end
-  end
-
-  describe 'unorderd lists' do
-    let(:fixture) { 'unordered_list' }
-
-    specify do
-      expect(hexp).to eq(
-        html(
-          H[:ul, [
-              H[:li, H[:p, 'banana']],
-              H[:li, H[:p, 'apple']],
-              H[:li, H[:p, 'guava']]]]))
-    end
-  end
-
-  describe 'ordered lists' do
-    let(:fixture) { 'ordered_list' }
-
-    specify do
-      expect(hexp).to eq(
-        html(
-          H[:ol, [
-              H[:li, H[:p, 'ninjas']],
-              H[:li, H[:p, 'pirates']],
-              H[:li, H[:p, 'sales people']]]]))
+  SPECS.each do |fixture_name, result|
+    context fixture_name do
+      let(:fixture) { fixture_name }
+      specify { expect(hexp).to eq html(*result) }
     end
   end
 
