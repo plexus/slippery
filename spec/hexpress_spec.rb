@@ -52,8 +52,8 @@ describe Hexpress, 'convert' do
     ],
     'definition_lists' => [
       H[:dl, [
-          H[:dt, ["Jabberwocky"]],
-          H[:dd, [H[:p, "mythical beast of poetic proportions"]]]]]
+          H[:dt, ['Jabberwocky']],
+          H[:dd, [H[:p, 'mythical beast of poetic proportions']]]]]
     ]
   }
 
