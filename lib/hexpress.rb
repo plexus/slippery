@@ -26,3 +26,6 @@ end
 
 require 'hexpress/version'
 require 'hexpress/converter'
+require 'hexpress/document'
+require 'hexpress/processors/add_impress_js'
+require 'hexpress/processors/hr_to_steps'

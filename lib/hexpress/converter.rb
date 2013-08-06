@@ -78,6 +78,12 @@ class Hexpress::Converter
     end
   end
 
+  [:a, :hr].each do |sym|
+    define_method sym do
+      tag! type
+    end
+  end
+
   # Convert the children of the Kramdown element to Hexps
   #
   # In other words, recurse down the tree. This will pass each
