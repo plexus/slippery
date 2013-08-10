@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Main class that does the conversion from Markdown/Kramdown to Hexp.
 # Subclass this for custom behavior.
 #
@@ -31,7 +32,7 @@ class Hexpress::Converter
   # @api semipublic
   #
   def root
-    H[:html, tag!(:body)]
+    H[:html, [H[:head], tag!(:body)]]
   end
 
   # Process a Kramdown :header type element
@@ -50,6 +51,15 @@ class Hexpress::Converter
   #
   def codeblock
     H[:pre, attr, H[:code, value]]
+  end
+
+  def smart_quote
+    {
+      :lsquo => '‘',
+      :rsquo => '’',
+      :ldquo => '“',
+      :rdquo => '”',
+    }[value]
   end
 
   # Create a Hexp::Node from the current element
@@ -72,7 +82,7 @@ class Hexpress::Converter
     end
   end
 
-  [:p, :blockquote, :ul, :li, :ol, :dl, :dt, :dd].each do |sym|
+  [:p, :blockquote, :ul, :li, :ol, :dl, :dt, :dd, :em, :strong, :img].each do |sym|
     define_method sym do
       tag! type
     end

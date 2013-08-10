@@ -1,6 +1,10 @@
 module Hexpress
   module Processors
     class HrToSteps
+      def self.call(doc)
+        self.new.call(doc)
+      end
+
       def initialize(offset_x = 1000, offset_y = 0)
         @offset_x, @offset_y = offset_x, offset_y
       end
@@ -13,7 +17,7 @@ module Hexpress
         end.rewrite('.step') do |step|
           @pos_x += @offset_x
           @pos_y += @offset_y
-          step | {'data-x' => @pos_x, 'data-y' => @pos_y}
+          step % {'data-x' => @pos_x, 'data-y' => @pos_y}
         end
       end
 

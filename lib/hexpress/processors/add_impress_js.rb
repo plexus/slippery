@@ -1,13 +1,15 @@
 module Hexpress
   module Processors
     class AddImpressJs
+      def self.call(doc)
+        self.new.call(doc)
+      end
+
       def call(doc)
         doc.rewrite('body') do |body|
-          body.
-            attr('id', 'impress').
-            attr('data-transition-duration', '1000').
-            add_child(H[:script, src: impress_js_path]).
-            add_child(H[:script, "impress().init();"])
+          body % {id: 'impress', "data-transition-duration" => '1000'} \
+               << H[:script, src: impress_js_path] \
+               << H[:script, "impress().init();"]
         end
       end
 
