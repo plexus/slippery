@@ -22,15 +22,15 @@ module Hexpress
       end
 
       def hr_to_div(hexp)
-        children = [[]]
+        divs = [H[:div]]
         hexp.children.each do |child|
           if child.tag == :hr
-            children << []
+            divs << H[:div, child.attributes].add_class('step')
           else
-            children.last << child
+            divs[-1] = divs.last << child
           end
         end
-        H[hexp.tag, hexp.attributes, children.map {|ch| H[:div, ch].add_class(:step)}]
+        H[hexp.tag, hexp.attributes, divs]
       end
 
     end

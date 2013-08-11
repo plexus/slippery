@@ -21,6 +21,7 @@ class Hexpress::Converter
   # @api public
   #
   def convert(el)
+    #Kernel.p el ; exit
     @type, @value, @attr, @children, @options =
       el.type, el.value, el.attr, el.children, el.options
     send(type)
@@ -62,6 +63,14 @@ class Hexpress::Converter
     }[value]
   end
 
+  def html_element
+    H[value.to_sym, attr, convert_children]
+  end
+
+  def entity
+    value.char
+  end
+
   # Create a Hexp::Node from the current element
   #
   # Helper for when you want to turn the Kramdown element straight into a
@@ -82,13 +91,7 @@ class Hexpress::Converter
     end
   end
 
-  [:p, :blockquote, :ul, :li, :ol, :dl, :dt, :dd, :em, :strong, :img].each do |sym|
-    define_method sym do
-      tag! type
-    end
-  end
-
-  [:a, :hr].each do |sym|
+  [:p, :blockquote, :ul, :li, :ol, :dl, :dt, :dd, :em, :strong, :img, :a, :hr, :br].each do |sym|
     define_method sym do
       tag! type
     end

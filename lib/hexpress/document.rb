@@ -9,7 +9,7 @@ module Hexpress
     end
 
     def kramdown_document
-      @kramdown_document ||= Kramdown::Document.new(@markdown)
+      @kramdown_document ||= Kramdown::Document.new(@markdown, input: 'GFM')
     end
 
     def to_hexp
