@@ -27,8 +27,12 @@ end
 require 'hexpress/version'
 require 'hexpress/converter'
 require 'hexpress/document'
-require 'hexpress/processors/add_impress_js'
-require 'hexpress/processors/hr_to_steps'
-require 'hexpress/processors/self_contained'
+
+require 'hexpress/processor_helpers'
+
 require 'hexpress/processors/add_google_font'
 require 'hexpress/processors/graphviz_dot'
+require 'hexpress/processors/hr_to_sections'
+require 'hexpress/processors/self_contained'
+require 'hexpress/processors/impress_js/add_impress_js'
+require 'hexpress/processors/impress_js/auto_offsets'

@@ -85,7 +85,7 @@ class Hexpress::Converter
     H[tag, attr, convert_children]
   end
 
-  [:text, :codespan, :blank].each do |sym|
+  [:text, :codespan, :blank, :raw].each do |sym|
     define_method sym do
       Hexp::TextNode.new(value)
     end
