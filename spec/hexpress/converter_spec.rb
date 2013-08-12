@@ -7,7 +7,7 @@ describe Hexpress::Converter, 'convert' do
   let(:markdown)  { load_fixture(fixture) }
 
   def html(*children)
-    H[:html, H[:body, children]]
+    H[:html, [H[:head], H[:body, children]]]
   end
 
   SPECS = {
