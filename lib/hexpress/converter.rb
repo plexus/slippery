@@ -63,12 +63,28 @@ class Hexpress::Converter
     }[value]
   end
 
+  def typographic_sym
+    {
+      :hellip => '…',
+      :mdash  => '—',
+      :ndash  => '–',
+      :laquo  => '«',
+      :raquo  => '»',
+      :laquo_space => '« ',
+      :raquo_space => ' »',
+    }[value]
+  end
+
   def html_element
     H[value.to_sym, attr, convert_children]
   end
 
   def entity
     value.char
+  end
+
+  def codespan
+    H[:code, value]
   end
 
   # Create a Hexp::Node from the current element
@@ -85,7 +101,7 @@ class Hexpress::Converter
     H[tag, attr, convert_children]
   end
 
-  [:text, :codespan, :blank, :raw].each do |sym|
+  [:text, :blank, :raw].each do |sym|
     define_method sym do
       Hexp::TextNode.new(value)
     end

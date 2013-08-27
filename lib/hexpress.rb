@@ -27,6 +27,7 @@ end
 require 'hexpress/version'
 require 'hexpress/converter'
 require 'hexpress/document'
+require 'hexpress/presentation'
 
 require 'hexpress/processor_helpers'
 
@@ -34,5 +35,8 @@ require 'hexpress/processors/add_google_font'
 require 'hexpress/processors/graphviz_dot'
 require 'hexpress/processors/hr_to_sections'
 require 'hexpress/processors/self_contained'
+
 require 'hexpress/processors/impress_js/add_impress_js'
 require 'hexpress/processors/impress_js/auto_offsets'
+
+require 'hexpress/processors/reveal_js/add_reveal_js'

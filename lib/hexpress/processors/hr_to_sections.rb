@@ -11,7 +11,7 @@ module Hexpress
         self.new.call(doc)
       end
 
-      def initialize(selector = 'body', wrapper = H[:section])
+      def initialize(wrapper = H[:section], selector = 'body')
         @selector, @wrapper = selector, wrapper
       end
 
@@ -23,7 +23,7 @@ module Hexpress
         sections = [@wrapper]
         element.children.each do |child|
           if child.tag == :hr
-            sections << @wrapper
+            sections << @wrapper.merge_attrs(child)
           else
             sections[-1] = sections.last << child
           end

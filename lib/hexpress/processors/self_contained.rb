@@ -13,7 +13,7 @@ module Hexpress
           .rewrite('link[rel=stylesheet]', &convert_stylesheet_to_inline)
           .rewrite('script[src]',          &convert_script_to_inline)
           .rewrite('img',                  &convert_image_to_data_uri)
-          .rewrite('style',                &convert_style_uri_to_data_uri)
+          #.rewrite('style',                &convert_style_uri_to_data_uri)
       end
 
       def convert_stylesheet_to_inline
@@ -31,13 +31,18 @@ module Hexpress
         ->(img) { H[:img, img.attributes.merge(src: data_uri(img[:src]))] }
       end
 
-      def convert_style_uri_to_data_uri
-        ->(style) { H[:style, style.attributes, style.children.first.gsub(/url\(['"]?[^'"\)]+['"]?\)/) {|url| "url('#{data_uri url[/url\(['"]?([^'"\)]+)/,1] }')"} ] }
-      end
+      # def convert_style_uri_to_data_uri
+      #   ->(style) {
+      #     H[:style, style.attributes, style.children.first.gsub(/url\(['"]?[^'"\)]+['"]?\)/) {|url| "url('#{data_uri url[/url\(['"]?([^'"\)]+)/,1] }')"} ] }
+      # end
 
       def read_uri(uri)
         @@download_cache ||= {}
-        @@download_cache[uri] ||= open(uri.sub('file://', '')).read
+        if uri =~ /http/
+          @@download_cache[uri] ||= open(uri.sub('file://', '')).read
+        else
+          open(uri.sub('file://', '')).read
+        end
       end
 
       def data_uri(uri)
