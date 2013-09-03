@@ -4,8 +4,12 @@ module Hexpress
   module Processors
     # Turn embedded dot files into embedded SVGs
     class GraphvizDot
-      def initialize(selector)
+      def initialize(selector = '.language-dot')
         @selector = selector
+      end
+
+      def self.call(doc)
+        self.new.call(doc)
       end
 
       def call(doc)
