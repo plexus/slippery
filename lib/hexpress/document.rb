@@ -13,7 +13,7 @@ module Hexpress
     end
 
     def to_hexp
-      @hexp ||= Hexpress::Converter.new.convert(kramdown_document.root)
+      @hexp ||= Hexpress::Converter.new.convert(kramdown_document.root).to_hexp
     end
 
   end
