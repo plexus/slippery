@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 # Main class that does the conversion from Markdown/Kramdown to Hexp.
 # Subclass this for custom behavior.
 #
@@ -86,6 +87,8 @@ class Hexpress::Converter
   def codespan
     H[:code, value]
   end
+
+  def xml_comment; end
 
   # Create a Hexp::Node from the current element
   #
