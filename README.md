@@ -12,7 +12,9 @@
 
 #Slippery
 
-The most flexible, customizable way to generate slides from Markdown.
+Marries the flexible [Kramdown](https://kramdown.rubyforge.org) parser for Markdown with the flexibility of DOM manipulation with [Hexp](https://github.com/plexus/hexp) to generate HTML slides backed by either Reveal.js or Impress.js.
+
+Because Slippery slides are the best slides.
 
 ## How to use
 
