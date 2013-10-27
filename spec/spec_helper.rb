@@ -1,4 +1,4 @@
-require 'hexpress'
+require 'slippery'
 require 'devtools/spec_helper'
 
 # Helper to load markdown files under spec/fixtures

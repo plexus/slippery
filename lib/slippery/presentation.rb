@@ -1,4 +1,4 @@
-module Hexpress
+module Slippery
   class Presentation
     include Hexp
 

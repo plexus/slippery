@@ -60,7 +60,7 @@ Attr:
 
 # Document classes and non-namespace modules.
 #
-# The Hexpress module is repeated many times, but only documented in hexpress.rb
+# The Slippery module is repeated many times, but only documented in slippery.rb
 Documentation:
   Enabled: false
 

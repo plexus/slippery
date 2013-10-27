@@ -1,16 +1,16 @@
-[![Gem Version](https://badge.fury.io/rb/hexpress.png)][gem]
-[![Build Status](https://secure.travis-ci.org/plexus/hexpress.png?branch=master)][travis]
-[![Dependency Status](https://gemnasium.com/plexus/hexpress.png)][gemnasium]
-[![Code Climate](https://codeclimate.com/github/plexus/hexpress.png)][codeclimate]
-[![Coverage Status](https://coveralls.io/repos/plexus/hexpress/badge.png?branch=master)][coveralls]
+[![Gem Version](https://badge.fury.io/rb/slippery.png)][gem]
+[![Build Status](https://secure.travis-ci.org/plexus/slippery.png?branch=master)][travis]
+[![Dependency Status](https://gemnasium.com/plexus/slippery.png)][gemnasium]
+[![Code Climate](https://codeclimate.com/github/plexus/slippery.png)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/plexus/slippery/badge.png?branch=master)][coveralls]
 
-[gem]: https://rubygems.org/gems/hexpress
-[travis]: https://travis-ci.org/plexus/hexpress
-[gemnasium]: https://gemnasium.com/plexus/hexpress
-[codeclimate]: https://codeclimate.com/github/plexus/hexpress
-[coveralls]: https://coveralls.io/r/plexus/hexpress
+[gem]: https://rubygems.org/gems/slippery
+[travis]: https://travis-ci.org/plexus/slippery
+[gemnasium]: https://gemnasium.com/plexus/slippery
+[codeclimate]: https://codeclimate.com/github/plexus/slippery
+[coveralls]: https://coveralls.io/r/plexus/slippery
 
-#Hexpress
+#Slippery
 
 The most flexible, customizable way to generate slides from Markdown.
 
@@ -22,17 +22,17 @@ In the same directory, create a Rakefile, here's a basic example :
 
 ```ruby
 task :build_presentation do
-  doc = Hexpress::Document.new(File.read('presentation.md'))
-  presentation = Hexpress::Presentation.new(doc, type: :reveal_js)
+  doc = Slippery::Document.new(File.read('presentation.md'))
+  presentation = Slippery::Presentation.new(doc, type: :reveal_js)
   File.write('presentation.html', presentation.to_html)
 end
 ```
 
-The presentation object responds to the [Hexp](http://github.com/plexus/hexp) DSL, so you can manipulate it before writing it out. In fact, Hexpress contains several "processor objects" for common tasks.
+The presentation object responds to the [Hexp](http://github.com/plexus/hexp) DSL, so you can manipulate it before writing it out. In fact, Slippery contains several "processor objects" for common tasks.
 
 ## Processors
 
-These are defined in the `Hexpress::Processors` namespace.
+These are defined in the `Slippery::Processors` namespace.
 
 ### GraphvizDot
 
@@ -45,10 +45,10 @@ In your presentation :
       node[shape=circle color=blue]
       edge[color=black penwidth=3]
 
-      hexpress[fontcolor=red];
+      slippery[fontcolor=red];
 
-      hexpress -> hexp -> equalizer;
-      hexpress -> kramdown;
+      slippery -> hexp -> equalizer;
+      slippery -> kramdown;
       hexp -> ice_nine;
     }
     ````
@@ -57,9 +57,9 @@ In the Rakefile
 
 ```ruby
 task :build_presentation do
-  include Hexpress::Processors
-  doc = Hexpress::Document.new(File.read('presentation.md'))
-  presentation = Hexpress::Presentation.new(doc, type: :reveal_js)
+  include Slippery::Processors
+  doc = Slippery::Document.new(File.read('presentation.md'))
+  presentation = Slippery::Presentation.new(doc, type: :reveal_js)
     .process(GraphvizDot)
 
   File.write('presentation.html', presentation.to_html)
@@ -73,18 +73,18 @@ And the result:
 <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 428)">
 <title>dependencies</title>
 <polygon fill="white" stroke="white" points="-4,5 -4,-428 302,-428 302,5 -4,5"/>
-<!-- hexpress -->
-<g id="node1" class="node"><title>hexpress</title>
+<!-- slippery -->
+<g id="node1" class="node"><title>slippery</title>
 <ellipse fill="none" stroke="blue" cx="176" cy="-369" rx="53.9477" ry="54.4472"/>
-<text text-anchor="middle" x="176" y="-365.4" font-family="Times Roman,serif" font-size="14.00" fill="red">hexpress</text>
+<text text-anchor="middle" x="176" y="-365.4" font-family="Times Roman,serif" font-size="14.00" fill="red">slippery</text>
 </g>
 <!-- hexp -->
 <g id="node3" class="node"><title>hexp</title>
 <ellipse fill="none" stroke="blue" cx="118" cy="-214" rx="34.8574" ry="35.3553"/>
 <text text-anchor="middle" x="118" y="-210.4" font-family="Times Roman,serif" font-size="14.00">hexp</text>
 </g>
-<!-- hexpress&#45;&gt;hexp -->
-<g id="edge2" class="edge"><title>hexpress&#45;&gt;hexp</title>
+<!-- slippery&#45;&gt;hexp -->
+<g id="edge2" class="edge"><title>slippery&#45;&gt;hexp</title>
 <path fill="none" stroke="black" stroke-width="3" d="M156.848,-317.818C149.486,-298.144 141.164,-275.903 134.115,-257.067"/>
 <polygon fill="black" stroke="black" points="137.34,-255.699 130.558,-247.56 130.784,-258.152 137.34,-255.699"/>
 </g>
@@ -93,8 +93,8 @@ And the result:
 <ellipse fill="none" stroke="blue" cx="234" cy="-214" rx="63.1385" ry="63.6396"/>
 <text text-anchor="middle" x="234" y="-210.4" font-family="Times Roman,serif" font-size="14.00">kramdown</text>
 </g>
-<!-- hexpress&#45;&gt;kramdown -->
-<g id="edge5" class="edge"><title>hexpress&#45;&gt;kramdown</title>
+<!-- slippery&#45;&gt;kramdown -->
+<g id="edge5" class="edge"><title>slippery&#45;&gt;kramdown</title>
 <path fill="none" stroke="black" stroke-width="3" d="M195.152,-317.818C199.302,-306.726 203.758,-294.819 208.119,-283.166"/>
 <polygon fill="black" stroke="black" points="211.524,-284.053 211.75,-273.46 204.968,-281.6 211.524,-284.053"/>
 </g>

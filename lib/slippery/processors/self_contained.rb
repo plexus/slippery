@@ -1,7 +1,7 @@
 require 'base64'
 require 'open-uri'
 
-module Hexpress
+module Slippery
   module Processors
     class SelfContained
       def self.call(doc)

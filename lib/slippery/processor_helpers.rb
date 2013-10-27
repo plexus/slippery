@@ -1,4 +1,4 @@
-module Hexpress
+module Slippery
   module ProcessorHelpers
     def self.included(klz)
       klz.extend ClassMethods

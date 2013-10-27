@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Hexpress::Converter, 'convert' do
+describe Slippery::Converter, 'convert' do
   subject(:converter) { Class.new(described_class) { def blank ; end }.new }
   let(:hexp)  { converter.convert(document.root) }
   let(:document)  { Kramdown::Document.new(markdown) }

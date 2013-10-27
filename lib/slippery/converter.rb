@@ -6,7 +6,7 @@
 # See https://github.com/3/blob/master/lib/kramdown/element.rb for a list of
 # types
 #
-class Hexpress::Converter
+class Slippery::Converter
   private_attr_accessor :type, :value, :attr, :children, :options
   undef_method :p
 

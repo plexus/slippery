@@ -1,6 +1,6 @@
 require 'tempfile'
 
-module Hexpress
+module Slippery
   module Processors
     # Turn embedded dot files into embedded SVGs
     class GraphvizDot
@@ -25,7 +25,7 @@ module Hexpress
       end
 
       def dot_to_hexp(dot_source)
-        file = Tempfile.new(['hexpress','.dot'])
+        file = Tempfile.new(['slippery','.dot'])
         file << dot_source
         file.close
         Hexp.parse(`dot #{file.path} -Tsvg`)

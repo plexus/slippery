@@ -1,15 +1,15 @@
 # encoding: utf-8
 
-require File.expand_path('../lib/hexpress/version', __FILE__)
+require File.expand_path('../lib/slippery/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.name        = 'hexpress'
-  gem.version     = Hexpress::VERSION
+  gem.name        = 'slippery'
+  gem.version     = Slippery::VERSION
   gem.authors     = [ 'Arne Brasseur' ]
   gem.email       = [ 'arne@arnebrasseur.net' ]
   gem.description = 'Make presentations with Markdown'
   gem.summary     = gem.description
-  gem.homepage    = 'https://github.com/plexus/hexpress'
+  gem.homepage    = 'https://github.com/plexus/slippery'
   gem.license     = 'MIT'
 
   gem.require_paths    = %w[lib]

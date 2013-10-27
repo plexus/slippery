@@ -1,6 +1,6 @@
 require 'cgi'
 
-module Hexpress
+module Slippery
   module Processors
     class AddGoogleFont
       def initialize(font_name, variants = [])

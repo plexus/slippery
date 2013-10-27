@@ -1,4 +1,4 @@
-module Hexpress
+module Slippery
   module Processors
     module ImpressJs
       class AutoOffsets

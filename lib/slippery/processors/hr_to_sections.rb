@@ -1,4 +1,4 @@
-module Hexpress
+module Slippery
   module Processors
     # Take a flat list of elements, and wrap elements between <hr> lines into
     # a sections.

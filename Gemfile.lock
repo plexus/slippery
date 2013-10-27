@@ -27,7 +27,7 @@ GIT
 PATH
   remote: .
   specs:
-    hexpress (0.0.1)
+    slippery (0.0.1)
       hexp (~> 0.0)
       kramdown (~> 1.1)
 
@@ -197,7 +197,7 @@ DEPENDENCIES
   guard-rspec (~> 3.0.2)
   guard-rubocop (~> 0.2.0)
   hexp!
-  hexpress!
+  slippery!
   jruby-openssl (~> 0.8.5)
   kramdown (~> 1.1.0)
   libnotify (~> 0.8.0)

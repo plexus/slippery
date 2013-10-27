@@ -1,4 +1,4 @@
-module Hexpress
+module Slippery
   class Document
     include Hexp
 
@@ -13,7 +13,7 @@ module Hexpress
     end
 
     def to_hexp
-      @hexp ||= Hexpress::Converter.new.convert(kramdown_document.root).to_hexp
+      @hexp ||= Slippery::Converter.new.convert(kramdown_document.root).to_hexp
     end
 
   end
