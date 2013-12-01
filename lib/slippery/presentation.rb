@@ -14,13 +14,13 @@ module Slippery
     def processors
       {
         :impress_js => [
-          HrToSections.new(H[:div, class: 'step']),
-          ImpressJs::AddImpressJs.new(js_options),
-          ImpressJs::AutoOffsets.new,
+          Processors::HrToSections.new(H[:div, class: 'step']),
+          Processors::ImpressJs::AddImpressJs.new(js_options),
+          Processors::ImpressJs::AutoOffsets.new,
         ],
         :reveal_js => [
-          HrToSections.new(H[:section]),
-          RevealJs::AddRevealJs.new(js_options),
+          Processors::HrToSections.new(H[:section]),
+          Processors::RevealJs::AddRevealJs.new(js_options),
         ]
       }[@options[:type]]
     end
