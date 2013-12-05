@@ -13,7 +13,8 @@ module Slippery
     end
 
     def asset_uri(path)
-      'file://' + File.expand_path('../../../assets/'+ path, __FILE__)
+      # 'file://' + File.expand_path('../../../assets/'+ path, __FILE__)
+      File.join('assets', path)
     end
 
     def javascript_include_tag(path)
