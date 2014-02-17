@@ -11,8 +11,8 @@ module Slippery
         self.new.call(doc)
       end
 
-      def initialize(wrapper = H[:section], selector = 'body')
-        @selector, @wrapper = selector, wrapper
+      def initialize(wrapper = H[:section], selector = 'body', anchor: true)
+        @selector, @wrapper, @anchor = selector, wrapper, anchor
       end
 
       def call(doc)
@@ -21,9 +21,15 @@ module Slippery
 
       def hr_to_section(element)
         sections = [@wrapper]
+        page = 1
         element.children.each do |child|
           if child.tag == :hr
-            sections << @wrapper.merge_attrs(child)
+            last_section = @wrapper.merge_attrs(child)
+            if @anchor
+              last_section = last_section.merge_attrs(name: "#{page}")
+              page += 1
+            end
+            sections << last_section
           else
             sections[-1] = sections.last << child
           end
