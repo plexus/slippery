@@ -24,11 +24,12 @@ module Slippery
         page = 1
         element.children.each do |child|
           if child.tag == :hr
-            sections << @wrapper.merge_attrs(child)
+            last_section = @wrapper.merge_attrs(child)
             if @anchor
-              sections[-1].merge_attrs(name: "#{page}")
+              last_section = last_section.merge_attrs(name: "#{page}")
               page += 1
             end
+            sections << last_section
           else
             sections[-1] = sections.last << child
           end
