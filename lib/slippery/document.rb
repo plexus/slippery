@@ -1,5 +1,3 @@
-require 'fileutils'
-
 module Slippery
   class Document
     include Hexp
@@ -8,6 +6,7 @@ module Slippery
 
     def initialize(markdown)
       @markdown = markdown
+
     end
 
     def kramdown_document
@@ -17,10 +16,5 @@ module Slippery
     def to_hexp
       @hexp ||= Slippery::Converter.new.convert(kramdown_document.root).to_hexp
     end
-
-    def self.copy_assets
-      FileUtils.cp_r(File.expand_path('../../../assets/', __FILE__), './')
-    end
-
   end
 end

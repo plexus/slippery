@@ -4,17 +4,12 @@ module Slippery
       klz.extend ClassMethods
     end
 
-    def include_local_javascript(element, relative_path)
-      element.add javascript_include_tag(asset_uri(relative_path))
+    def include_local_javascript(element, path)
+      element.add javascript_include_tag(path)
     end
 
-    def include_local_css(element, relative_path)
-      element.add stylesheet_link_tag(asset_uri(relative_path))
-    end
-
-    def asset_uri(path)
-      # 'file://' + File.expand_path('../../../assets/'+ path, __FILE__)
-      File.join('assets', path)
+    def include_local_css(element, path)
+      element.add stylesheet_link_tag(path)
     end
 
     def javascript_include_tag(path)

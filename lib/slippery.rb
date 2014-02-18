@@ -27,6 +27,7 @@ end
 require 'slippery/version'
 require 'slippery/converter'
 require 'slippery/document'
+require 'slippery/assets'
 require 'slippery/presentation'
 
 require 'slippery/processor_helpers'
