@@ -10,19 +10,18 @@ module Slippery
     def initialize(document, options = {})
       @document = document
       @options = DEFAULT_OPTIONS.merge(options).freeze
-      if @options[:local]
-        Assets::embed_locally
-      end
+
+      Assets::embed_locally if @options[:local]
     end
 
     def processors
       {
-        :impress_js => [
+        impress_js: [
           Processors::HrToSections.new(H[:div, class: 'step']),
           Processors::ImpressJs::AddImpressJs.new(Assets::path_composer(@options[:local]), js_options),
           Processors::ImpressJs::AutoOffsets.new,
         ],
-        :reveal_js => [
+        reveal_js: [
           Processors::HrToSections.new(H[:section]),
           Processors::RevealJs::AddRevealJs.new(Assets::path_composer(@options[:local]), js_options),
         ]
@@ -30,7 +29,7 @@ module Slippery
     end
 
     def js_options
-      @options.reject {|key,_| [:type].include? key }
+      @options.reject { |key, _| [:type].include? key }
     end
 
     def to_hexp

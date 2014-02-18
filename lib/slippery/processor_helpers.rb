@@ -21,14 +21,14 @@ module Slippery
     end
 
     def data_attributes(attrs)
-      Hash[*attrs.flat_map {|k,v| ["data-#{k}", v]}]
+      Hash[*attrs.flat_map { |k, v| ["data-#{k}", v] }]
     end
 
     module ClassMethods
       def processor(name, selector = nil, &blk)
         if selector
           define_method name do
-            ->(node) { node.replace(selector) {|node| instance_exec(node, &blk) } }
+            ->(node) { node.replace(selector) { |node| instance_exec(node, &blk) } }
           end
         else
           define_method name { ->(node) { blk.call(node) } }

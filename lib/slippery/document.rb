@@ -6,7 +6,6 @@ module Slippery
 
     def initialize(markdown)
       @markdown = markdown
-
     end
 
     def kramdown_document

@@ -23,10 +23,9 @@ module Slippery
          doc.replace('body') do |body|
            include_local_javascript(body, @path_composer.call('impress.js/js/impress.js'))
              .set_attributes({id: 'impress'}.merge(data_attributes(attributes)))
-             .add H[:script, "impress().init();"]
+             .add H[:script, 'impress().init();']
          end
        end
-
      end
    end
  end

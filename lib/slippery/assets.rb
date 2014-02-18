@@ -10,11 +10,10 @@ module Slippery
 
     def self.path_composer(local)
       if local
-        ->(path){File.join('assets', path)}
+        ->(path) { File.join('assets', path) }
       else
-        ->(path){"file://#{File.expand_path(File.join(ASSETS_PATH, path), __FILE__)}"}
+        ->(path) { "file://#{File.expand_path(File.join(ASSETS_PATH, path), __FILE__)}" }
       end
     end
   end
 end
-
