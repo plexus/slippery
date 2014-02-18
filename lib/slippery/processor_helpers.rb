@@ -4,16 +4,12 @@ module Slippery
       klz.extend ClassMethods
     end
 
-    def include_local_javascript(element, relative_path)
-      element.add javascript_include_tag(asset_uri(relative_path))
+    def include_local_javascript(element, path)
+      element.add javascript_include_tag(path)
     end
 
-    def include_local_css(element, relative_path)
-      element.add stylesheet_link_tag(asset_uri(relative_path))
-    end
-
-    def asset_uri(path)
-      'file://' + File.expand_path('../../../assets/'+ path, __FILE__)
+    def include_local_css(element, path)
+      element.add stylesheet_link_tag(path)
     end
 
     def javascript_include_tag(path)
@@ -25,14 +21,14 @@ module Slippery
     end
 
     def data_attributes(attrs)
-      Hash[*attrs.flat_map {|k,v| ["data-#{k}", v]}]
+      Hash[*attrs.flat_map { |k, v| ["data-#{k}", v] }]
     end
 
     module ClassMethods
       def processor(name, selector = nil, &blk)
         if selector
           define_method name do
-            ->(node) { node.replace(selector) {|node| instance_exec(node, &blk) } }
+            ->(node) { node.replace(selector) { |node| instance_exec(node, &blk) } }
           end
         else
           define_method name { ->(node) { blk.call(node) } }

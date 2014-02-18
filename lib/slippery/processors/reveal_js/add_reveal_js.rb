@@ -12,7 +12,8 @@ module Slippery
 
         DEFAULT_OPTIONS = {theme: 'default'}.freeze
 
-        def initialize(options = {})
+        def initialize(path_composer, options = {})
+          @path_composer = path_composer
           @options = DEFAULT_OPTIONS.merge(options).freeze
         end
 
@@ -27,20 +28,20 @@ module Slippery
         end
 
         processor :add_reveal_js, 'body' do |body|
-          body = include_local_javascript(body, 'reveal.js/lib/js/head.min.js')
-          include_local_javascript(body, 'reveal.js/js/reveal.js')
+          body = include_local_javascript(body, @path_composer.call('reveal.js/lib/js/head.min.js'))
+          include_local_javascript(body, @path_composer.call('reveal.js/js/reveal.js'))
         end
 
         processor :add_reveal_css, 'head' do |head|
-          include_local_css(head, 'reveal.js/css/reveal.min.css')
+          include_local_css(head, @path_composer.call('reveal.js/css/reveal.min.css'))
         end
 
         processor :add_theme, 'head' do |head|
-          include_local_css(head, "reveal.js/css/theme/#{@options[:theme]}.css")
+          include_local_css(head, @path_composer.call("reveal.js/css/theme/#{@options[:theme]}.css"))
         end
 
         processor :add_settings, 'body' do |body|
-          body.add(H[:script, "Reveal.initialize({ #{plugin_settings}, #{settings.map {|k,v| "#{k}:#{v.inspect}"}.join(',')} });"])
+          body.add(H[:script, "Reveal.initialize({ #{plugin_settings}, #{settings.map { |k, v| "#{k}:#{v.inspect}" }.join(',')} });"])
         end
 
         processor :reveal_wrap, 'body' do |body|
@@ -53,14 +54,14 @@ module Slippery
         end
 
         def settings
-          @options.reject{|key,_| [:theme, :plugins].include? key }
+          @options.reject { |key, _| [:theme, :plugins].include? key }
         end
 
         def plugin_settings
-          "dependencies: [" +
+          'dependencies: [' +
           Array(@options.fetch(:plugins, [])).map do |name|
             plugin_config name
-          end.join(',') + "]"
+          end.join(',') + ']'
         end
 
         def plugins(name)
