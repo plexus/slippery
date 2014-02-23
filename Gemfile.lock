@@ -3,7 +3,7 @@ GIT
   revision: bca222ee252d4d4bd86f55967704965711e90096
   specs:
     devtools (0.0.2)
-      ice_nine (~> 0.8.0)
+      ice_nine (~> 0.9.0)
 
 GIT
   remote: https://github.com/bbatsov/rubocop.git
@@ -27,16 +27,18 @@ GIT
 PATH
   remote: .
   specs:
-    slippery (0.0.1)
+    slippery (0.0.3)
       hexp (~> 0.0)
       kramdown (~> 1.1)
+      rb-inotify
 
 PATH
   remote: /home/arne/github/hexp
   specs:
-    hexp (0.2.0)
+    hexp (0.3.1)
       equalizer (~> 0.0)
-      ice_nine (~> 0.8)
+      fzip (~> 0.1)
+      ice_nine (~> 0.9)
       nokogiri (~> 1.6)
       sass (~> 3.2)
 
@@ -45,7 +47,7 @@ GEM
   specs:
     abstract_type (0.0.6)
     adamantium (0.0.11)
-      ice_nine (~> 0.8.0)
+      ice_nine (~> 0.9.0)
     anima (0.0.6)
       abstract_type (~> 0.0.4)
       adamantium (~> 0.0.6)
@@ -79,6 +81,7 @@ GEM
       ruby_parser (~> 3.1, > 3.1.0)
       sexp_processor (~> 4.0)
     formatador (0.2.4)
+    fzip (0.2.0)
     guard (1.8.1)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -98,7 +101,7 @@ GEM
     guard-rubocop (0.2.0)
       guard (~> 1.8)
       rubocop (~> 0.9)
-    ice_nine (0.8.0)
+    ice_nine (0.9.0)
     inflecto (0.0.2)
     kramdown (1.1.0)
     libnotify (0.8.1)
@@ -110,7 +113,7 @@ GEM
     lumberjack (1.0.4)
     method_source (0.8.1)
     mime-types (1.23)
-    mini_portile (0.5.1)
+    mini_portile (0.5.2)
     multi_json (1.7.7)
     mutant (0.3.0.beta18)
       adamantium (~> 0.0.10)
@@ -118,12 +121,12 @@ GEM
       concord (~> 0.1.1)
       descendants_tracker (~> 0.0.1)
       equalizer (~> 0.0.5)
-      ice_nine (~> 0.8.0)
+      ice_nine (~> 0.9.0)
       inflecto (~> 0.0.2)
       parser (~> 2.0.0.pre2)
       rspec (~> 2.14.1)
       unparser (~> 0.0.8)
-    nokogiri (1.6.0)
+    nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     parser (2.0.0.pre2)
       ast (~> 1.1)
@@ -160,7 +163,8 @@ GEM
       sexp_processor (~> 4.0)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
-    sass (3.2.9)
+    rubygems-tasks (0.2.4)
+    sass (3.2.14)
     sexp_processor (4.2.1)
     simplecov (0.7.1)
       multi_json (~> 1.0)
@@ -197,7 +201,6 @@ DEPENDENCIES
   guard-rspec (~> 3.0.2)
   guard-rubocop (~> 0.2.0)
   hexp!
-  slippery!
   jruby-openssl (~> 0.8.5)
   kramdown (~> 1.1.0)
   libnotify (~> 0.8.0)
@@ -213,7 +216,9 @@ DEPENDENCIES
   reek (~> 1.3.1)!
   rspec (~> 2.14.1)
   rubocop (~> 0.10.0)!
+  rubygems-tasks
   simplecov (~> 0.7.1)
+  slippery!
   terminal-notifier-guard (~> 1.5.3)
   yard (~> 0.8.6.2)
   yard-spellcheck (~> 0.1.5)
