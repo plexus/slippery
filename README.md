@@ -30,6 +30,12 @@ Slippery::RakeTasks.new
 
 Slippery will detect and markdown files in the current directory, and generate rake tasks for them.
 
+```
+rake slippery:build               # build all
+rake slippery:build:presentation  # build presentation
+```
+
+
 You can use a block to configure Slippery:
 
 ```ruby
