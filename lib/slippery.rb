@@ -41,3 +41,5 @@ require 'slippery/processors/impress_js/add_impress_js'
 require 'slippery/processors/impress_js/auto_offsets'
 
 require 'slippery/processors/reveal_js/add_reveal_js'
+
+require 'slippery/rake_tasks'

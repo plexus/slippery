@@ -20,17 +20,47 @@ Because Slippery slides are the best slides.
 
 Create a markdown file, say `presentation.md`, that will be the source of your presentation. use `---` to separate slides.
 
-In the same directory, create a Rakefile, here's a basic example :
+In the same directory, create a Rakefile, the most basic form is :
 
 ```ruby
-task :build_presentation do
-  doc = Slippery::Document.new(File.read('presentation.md'))
-  presentation = Slippery::Presentation.new(doc, type: :reveal_js)
-  File.write('presentation.html', presentation.to_html)
+require 'slippery'
+
+Slippery::RakeTasks.new
+```
+
+Slippery will detect and markdown files in the current directory, and generate rake tasks for them.
+
+You can use a block to configure Slippery:
+
+```ruby
+require 'slippery'
+
+Slippery::RakeTasks.new do |s|
+  s.options = {
+    type: :reveal_js,
+    theme: 'beige',
+    controls: false,
+    backgroundTransition: 'slide',
+    history: true,
+    plugins: [:notes]
+  }
+
+  s.processor 'head' do |head|
+    head <<= H[:title, 'Web Services, Past Present Future']
+  end
 end
 ```
 
-The presentation object responds to the [Hexp](http://github.com/plexus/hexp) DSL, so you can manipulate it before writing it out. In fact, Slippery contains several "processor objects" for common tasks.
+After converting your presentation from Markdown, you can use Hexp to perform transformations on the result. This is what happens with the `processor`, you pass it a CSS selector, each matching element gets passed into the block, and replaced by whatever the block returns. See the [Hexp](http://github.com/plexus/hexp) DSL for details.
+
+You can also add built-in or custom processors directly
+
+```ruby
+Slippery::RakeTasks.new do |s|
+  s.processors << Slippery::Processors::GraphvizDot.new('.dot')
+  s.processors << Slippery::Processors::SelfContained
+end
+```
 
 ## Processors
 
@@ -58,13 +88,9 @@ In your presentation :
 In the Rakefile
 
 ```ruby
-task :build_presentation do
-  include Slippery::Processors
-  doc = Slippery::Document.new(File.read('presentation.md'))
-  presentation = Slippery::Presentation.new(doc, type: :reveal_js)
-    .process(GraphvizDot)
-
-  File.write('presentation.html', presentation.to_html)
+Slippery::RakeTasks.new do |s|
+  s.processors << Slippery::Processors::GraphvizDot.new('.dot')
+  s.processors << Slippery::Processors::SelfContained
 end
 ```
 

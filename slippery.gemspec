@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_runtime_dependency 'hexp'         , '~> 0.0'
   gem.add_runtime_dependency 'kramdown'     , '~> 1.1'
+  gem.add_runtime_dependency 'rb-inotify'
 
   gem.add_development_dependency 'rake',  '~> 10.1'
   gem.add_development_dependency 'rspec', '~> 2.14'

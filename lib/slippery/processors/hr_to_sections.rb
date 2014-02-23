@@ -11,8 +11,8 @@ module Slippery
         self.new.call(doc)
       end
 
-      def initialize(wrapper = H[:section], selector = 'body', anchor: true)
-        @selector, @wrapper, @anchor = selector, wrapper, anchor
+      def initialize(wrapper = H[:section], selector = 'body', options = {})
+        @selector, @wrapper, @anchor = selector, wrapper, options.fetch(:anchor, true)
       end
 
       def call(doc)
