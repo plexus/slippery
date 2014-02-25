@@ -5,6 +5,6 @@ group :development do
   eval File.read('Gemfile.devtools')
 end
 
-gem 'hexp', path: '/home/arne/github/hexp'
+#gem 'hexp', path: '/home/arne/github/hexp'
 
 gemspec
