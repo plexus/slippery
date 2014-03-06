@@ -26,11 +26,11 @@ module Slippery
       presentations.map {|path| [ path.basename(path.extname), path ] }
     end
 
-    def markdown_to_hexp(infile)
+    def markdown_to_hexp(infile, options = {})
       doc = Slippery::Document.new(infile.read)
-      doc = Slippery::Presentation.new(doc, options)
+      doc = Slippery::Presentation.new(doc, @options.merge(options))
 
-      doc.process(*processors)
+      doc.process(*processors.reject {|pr| options[:skip_self_contained] && pr == Slippery::Processors::SelfContained})
     end
 
     def processor(selector, &blk)
@@ -43,6 +43,16 @@ module Slippery
 
     def self_contained
       processors << Slippery::Processors::SelfContained
+    end
+
+    def title(title)
+      processor 'head' do |head|
+        head <<= H[:title, title]
+      end
+    end
+
+    def add_highlighting(style = Slippery::Processors::AddHighlight::DEFAULT_STYLE, version = Slippery::Processors::AddHighlight::DEFAULT_VERSION)
+      processors << Slippery::Processors::AddHighlight.new(style, version)
     end
 
     def define
@@ -61,14 +71,17 @@ module Slippery
 
         namespace :watch do
           presentation_names.each do |name, path|
+            files = markdown_to_hexp(path, skip_self_contained: true).select('link,script').map {|link| link.attr('href') || link.attr('src')}.compact
+            files = files.select {|f| File.exist?(f)}
+
             desc "watch #{name} for changes"
-            WatchTask.new(name, [path.to_s]) do
+            WatchTask.new(name, [path.to_s, *files]) do
               dest = Tempfile.new("#{name}.html")
               File.open("#{name}.html") { |src| FileUtils.copy_stream(src, dest) }
               dest.close
               Rake::Task["#{@name}:build:#{name}"].execute
               puts "="*60
-              print `diff -u #{dest.path} #{name}.html` if File.exist? "#{name}.html"
+              print `diff -u #{dest.path} #{name}.html | cut -c1-150` if File.exist? "#{name}.html"
             end
           end
         end

@@ -22,7 +22,7 @@ module Slippery
        def call(doc)
          doc.replace('body') do |body|
            include_local_javascript(body, @path_composer.call('impress.js/js/impress.js'))
-             .set_attributes({id: 'impress'}.merge(data_attributes(attributes)))
+             .set_attrs({id: 'impress'}.merge(data_attributes(attributes)))
              .add H[:script, 'impress().init();']
          end
        end

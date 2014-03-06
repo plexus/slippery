@@ -1,13 +1,12 @@
-require 'fileutils'
-
 # Manage the assets and their URI/path
 module Slippery
   module Assets
-    ASSETS_PATH = '../../../assets/'
+    ASSETS_PATH = ROOT.join('assets')
 
     # Copies the assets locally
     def self.embed_locally
-      FileUtils.cp_r(File.expand_path(ASSETS_PATH, __FILE__), './')
+      raise 'damn'
+      FileUtils.cp_r(ASSETS_PATH, './')
     end
 
     # returns a composer returning a URI for a given relative file path

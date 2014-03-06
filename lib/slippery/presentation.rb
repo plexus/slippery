@@ -4,7 +4,8 @@ module Slippery
 
     DEFAULT_OPTIONS = {
       type: :reveal_js,
-      local: true
+      local: true,
+      history: true
     }.freeze
 
     def initialize(document, options = {})
@@ -19,8 +20,8 @@ module Slippery
         impress_js: [
           Processors::HrToSections.new(H[:div, class: 'step']),
           Processors::ImpressJs::AddImpressJs.new(Assets::path_composer(@options[:local]), js_options),
-          Processors::ImpressJs::AutoOffsets.new,
-        ],
+          (Processors::ImpressJs::AutoOffsets.new unless @options.fetch(:manual_offsets, false)),
+        ].compact,
         reveal_js: [
           Processors::HrToSections.new(H[:section]),
           Processors::RevealJs::AddRevealJs.new(Assets::path_composer(@options[:local]), js_options),

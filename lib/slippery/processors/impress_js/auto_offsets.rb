@@ -10,7 +10,7 @@ module Slippery
         def call(doc)
           doc.replace('.step') do |step|
             ['data-x', 'data-y'].each_with_index do |axis, idx|
-              if step.attr?(axis)
+              if step.has_attr?(axis)
                 @position[idx] = step[axis].to_i
               else
                 @position[idx] += @offsets[idx]

@@ -1,8 +1,11 @@
 require 'kramdown'
 require 'hexp'
+require 'pathname'
 
 # Slippery namespace module
 module Slippery
+  ROOT = Pathname(__FILE__).dirname.parent
+
   def self.convert(element)
     Slippery::Converter.new.convert(element)
   end
@@ -36,6 +39,7 @@ require 'slippery/processors/add_google_font'
 require 'slippery/processors/graphviz_dot'
 require 'slippery/processors/hr_to_sections'
 require 'slippery/processors/self_contained'
+require 'slippery/processors/add_highlight'
 
 require 'slippery/processors/impress_js/add_impress_js'
 require 'slippery/processors/impress_js/auto_offsets'

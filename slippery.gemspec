@@ -17,11 +17,11 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- spec`.split($/)
   gem.extra_rdoc_files = %w[README.md LICENSE]
 
-  gem.add_runtime_dependency 'hexp'         , '~> 0.0'
-  gem.add_runtime_dependency 'kramdown'     , '~> 1.1'
+  gem.add_runtime_dependency 'hexp'       , '~> 0.0'
+  gem.add_runtime_dependency 'kramdown'   , '~> 1.1'
   gem.add_runtime_dependency 'rb-inotify'
+  gem.add_runtime_dependency 'rake'       ,  '~> 10.1'
 
-  gem.add_development_dependency 'rake',  '~> 10.1'
   gem.add_development_dependency 'rspec', '~> 2.14'
   gem.add_development_dependency 'rubygems-tasks'
 end
