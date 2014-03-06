@@ -27,20 +27,11 @@ GIT
 PATH
   remote: .
   specs:
-    slippery (0.0.3)
+    slippery (0.1.0)
       hexp (~> 0.0)
       kramdown (~> 1.1)
+      rake (~> 10.1)
       rb-inotify
-
-PATH
-  remote: /home/arne/github/hexp
-  specs:
-    hexp (0.3.1)
-      equalizer (~> 0.0)
-      fzip (~> 0.1)
-      ice_nine (~> 0.9)
-      nokogiri (~> 1.6)
-      sass (~> 3.2)
 
 GEM
   remote: https://rubygems.org/
@@ -81,7 +72,6 @@ GEM
       ruby_parser (~> 3.1, > 3.1.0)
       sexp_processor (~> 4.0)
     formatador (0.2.4)
-    fzip (0.2.0)
     guard (1.8.1)
       formatador (>= 0.2.4)
       listen (>= 1.0.0)
@@ -101,6 +91,11 @@ GEM
     guard-rubocop (0.2.0)
       guard (~> 1.8)
       rubocop (~> 0.9)
+    hexp (0.3.1)
+      equalizer (~> 0.0)
+      ice_nine (~> 0.9)
+      nokogiri (~> 1.6)
+      sass (~> 3.2)
     ice_nine (0.9.0)
     inflecto (0.0.2)
     kramdown (1.1.0)
@@ -200,7 +195,6 @@ DEPENDENCIES
   guard-mutant (~> 0.0.1)
   guard-rspec (~> 3.0.2)
   guard-rubocop (~> 0.2.0)
-  hexp!
   jruby-openssl (~> 0.8.5)
   kramdown (~> 1.1.0)
   libnotify (~> 0.8.0)
