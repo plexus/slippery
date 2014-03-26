@@ -14,8 +14,8 @@ module Slippery
 
       def call(doc)
         doc
-          .rewrite(@selector, &create_svg_from_dot)
-          .rewrite('polygon[fill=white][stroke=white]') { [] }
+          .replace(@selector, &create_svg_from_dot)
+          .replace('polygon[fill=white][stroke=white]') { [] }
       end
 
       def create_svg_from_dot
