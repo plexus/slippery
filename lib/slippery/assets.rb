@@ -5,7 +5,6 @@ module Slippery
 
     # Copies the assets locally
     def self.embed_locally
-      raise 'damn'
       FileUtils.cp_r(ASSETS_PATH, './')
     end
 
