@@ -1,6 +1,11 @@
+require 'base64'
+require 'pathname'
+require 'open-uri'
+require 'forwardable'
+
 require 'kramdown'
 require 'hexp'
-require 'pathname'
+require 'concord'
 
 # Slippery namespace module
 module Slippery
@@ -38,7 +43,7 @@ require 'slippery/processor_helpers'
 require 'slippery/processors/add_google_font'
 require 'slippery/processors/graphviz_dot'
 require 'slippery/processors/hr_to_sections'
-require 'slippery/processors/self_contained'
+require 'slippery/processors/bundle_assets'
 require 'slippery/processors/add_highlight'
 
 require 'slippery/processors/impress_js/add_impress_js'

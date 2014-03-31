@@ -1,5 +1,5 @@
 require 'slippery'
-require 'devtools/spec_helper'
+#require 'devtools/spec_helper'
 
 # Helper to load markdown files under spec/fixtures
 #

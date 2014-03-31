@@ -11,8 +11,6 @@ module Slippery
     def initialize(document, options = {})
       @document = document
       @options = DEFAULT_OPTIONS.merge(options).freeze
-
-      Assets::embed_locally if @options[:local]
     end
 
     def processors
