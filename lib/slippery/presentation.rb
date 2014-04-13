@@ -17,12 +17,12 @@ module Slippery
       {
         impress_js: [
           Processors::HrToSections.new(H[:div, class: 'step']),
-          Processors::ImpressJs::AddImpressJs.new(Assets::path_composer(@options[:local]), js_options),
+          Processors::ImpressJs::AddImpressJs.new(js_options),
           (Processors::ImpressJs::AutoOffsets.new unless @options.fetch(:manual_offsets, false)),
         ].compact,
         reveal_js: [
           Processors::HrToSections.new(H[:section]),
-          Processors::RevealJs::AddRevealJs.new(Assets::path_composer(@options[:local]), js_options),
+          Processors::RevealJs::AddRevealJs.new(js_options),
         ]
       }[@options[:type]]
     end
