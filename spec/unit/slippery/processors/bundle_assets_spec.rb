@@ -34,4 +34,24 @@ describe Slippery::Processors::BundleAssets do
     end
   end
 
+  describe 'CopyStrategy' do
+    let(:strategy) { described_class::CopyStrategy.new }
+
+    subject { described_class.new(strategy) }
+
+    describe '#call' do
+      it 'should replace script src with local path' do
+        expect(
+          subject.call(H[:script, {src: 'reveal.js/js/reveal.js', type: 'text/javascript'}])
+        ).to eq H[:script, {src: 'assets/reveal.js/js/reveal.js', type: 'text/javascript'}]
+      end
+
+      it 'should replace link src with local path' do
+        expect(
+          subject.call(H[:link, {href: 'reveal.js/css/reveal.min.css', rel: 'stylesheet'}])
+        ).to eq H[:link, {href: 'assets/reveal.js/css/reveal.min.css', rel: 'stylesheet'}]
+      end
+    end
+  end
+
 end
