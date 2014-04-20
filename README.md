@@ -54,6 +54,8 @@ Slippery::RakeTasks.new do |s|
   s.processor 'head' do |head|
     head <<= H[:title, 'Web Services, Past Present Future']
   end
+
+  s.include_assets
 end
 ```
 
@@ -64,9 +66,22 @@ You can also add built-in or custom processors directly
 ```ruby
 Slippery::RakeTasks.new do |s|
   s.processors << Slippery::Processors::GraphvizDot.new('.dot')
-  s.processors << Slippery::Processors::SelfContained
 end
 ```
+
+The rake task also has a few DSL methods for common use cases
+
+```ruby
+Slippery::RakeTasks.new do |s|
+  s.title "Functional Programming in Ruby"
+  s.include_assets
+  s.add_highlighting
+end
+```
+
+* `title` Configure the title used in the HTML `&lt;title&gt;` tag
+* `include_assets` Download/copy all js/css/images to the `assets` directory, and adjust the URIs in the document accordingly
+* `add_highlighting` Add Highlight.js. Takes the style and version as arguments, e.g. `add_highlighting(:default, '0.8.0')`
 
 ## Processors
 
@@ -74,7 +89,7 @@ These are defined in the `Slippery::Processors` namespace.
 
 ### GraphvizDot
 
-The "Dot" language is a DSL (domain specific language) for describing graphs. Using the `GraphvizDot` processor, you can turn "dot" fragments into inline SVG graphics.
+The "Dot" language is a DSL (domain specific language) for describing graphs. Using the `GraphvizDot` processor, you can turn "dot" fragments into inline SVG graphics. This requires the `dot` command line utility to be available on your system. Look for a package named `graphviz`.
 
 In your presentation :
 

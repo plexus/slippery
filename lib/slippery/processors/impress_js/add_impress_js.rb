@@ -14,14 +14,13 @@ module Slippery
         'transition-duration' => 1000
       }.freeze
 
-       def initialize(path_composer, attributes = {})
-         @path_composer = path_composer
-         @attributes = DEFAULT_ATTRS.merge(attributes).freeze
+       def initialize(attributes = {})
+         @attributes    = DEFAULT_ATTRS.merge(attributes).freeze
        end
 
        def call(doc)
          doc.replace('body') do |body|
-           include_local_javascript(body, @path_composer.call('impress.js/js/impress.js'))
+           include_local_javascript(body, asset_uri('impress.js/js/impress.js'))
              .set_attrs({id: 'impress'}.merge(data_attributes(attributes)))
              .add H[:script, 'impress().init();']
          end

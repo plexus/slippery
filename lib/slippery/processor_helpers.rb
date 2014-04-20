@@ -4,6 +4,10 @@ module Slippery
       klz.extend ClassMethods
     end
 
+    def asset_uri(path)
+      "file://" + Slippery::ROOT.join('assets', path).to_s
+    end
+
     def include_local_javascript(element, path)
       element.add javascript_include_tag(path)
     end

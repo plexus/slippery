@@ -2,8 +2,6 @@ module Slippery
   class Document
     include Hexp
 
-    private_attr_accessor :processors
-
     def initialize(markdown)
       @markdown = markdown
     end

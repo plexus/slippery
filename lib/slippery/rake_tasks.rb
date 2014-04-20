@@ -27,10 +27,11 @@ module Slippery
     end
 
     def markdown_to_hexp(infile, options = {})
+      @infile = infile
       doc = Slippery::Document.new(infile.read)
       doc = Slippery::Presentation.new(doc, @options.merge(options))
 
-      doc.process(*processors.reject {|pr| options[:skip_self_contained] && pr == Slippery::Processors::SelfContained})
+      doc.process(*processors)
     end
 
     def processor(selector, &blk)
@@ -41,9 +42,19 @@ module Slippery
       end
     end
 
-    def self_contained
-      processors << Slippery::Processors::SelfContained
+    def include_assets
+      processors << method(:call_asset_packer)
     end
+    alias self_contained include_assets
+
+    def call_asset_packer(doc)
+      AssetPacker::Processor::Local.new(
+        @infile.to_s,
+        @infile.dirname.join('assets'),
+        @infile
+      ).(doc)
+    end
+
 
     def title(title)
       processor 'head' do |head|
