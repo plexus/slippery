@@ -17,7 +17,6 @@ module Slippery
           head <<= H[:script, 'hljs.initHighlightingOnLoad();']
         end
       end
-
     end
   end
 end

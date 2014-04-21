@@ -55,7 +55,6 @@ module Slippery
       ).(doc)
     end
 
-
     def title(title)
       processor 'head' do |head|
         head <<= H[:title, title]
@@ -96,9 +95,7 @@ module Slippery
             end
           end
         end
-
       end
-
     end
   end
 
@@ -120,5 +117,4 @@ module Slippery
       @notifier ||= INotify::Notifier.new
     end
   end
-
 end
