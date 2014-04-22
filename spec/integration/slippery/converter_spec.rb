@@ -63,5 +63,4 @@ describe Slippery::Converter, 'convert' do
       specify { expect(hexp).to eq html(*result) }
     end
   end
-
 end

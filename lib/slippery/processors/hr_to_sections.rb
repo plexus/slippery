@@ -36,7 +36,6 @@ module Slippery
         end
         element.set_children(sections)
       end
-
     end
   end
 end
