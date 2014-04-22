@@ -29,8 +29,12 @@ require 'slippery/processors/graphviz_dot'
 require 'slippery/processors/hr_to_sections'
 require 'slippery/processors/add_highlight'
 
+require 'slippery/processor'
 require 'slippery/processors/impress_js/add_impress_js'
 require 'slippery/processors/impress_js/auto_offsets'
+require 'slippery/processors/jquery'
+require 'slippery/processors/fathom_js'
+require 'slippery/processors/deck_js'
 
 require 'slippery/processors/reveal_js/add_reveal_js'
 

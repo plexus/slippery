@@ -4,7 +4,6 @@ module Slippery
 
     DEFAULT_OPTIONS = {
       type: :reveal_js,
-      local: true,
       history: true
     }.freeze
 
@@ -23,6 +22,16 @@ module Slippery
         reveal_js: [
           Processors::HrToSections.new(H[:section]),
           Processors::RevealJs::AddRevealJs.new(js_options),
+        ],
+        fathom_js: [
+          Processors::HrToSections.new(H[:div, class: 'slide']),
+          Processors::JQuery.new(js_options),
+          Processors::FathomJs.new(js_options),
+        ],
+        deck_js: [
+          Processors::HrToSections.new(H[:section, class: 'slide']),
+          Processors::JQuery.new(js_options),
+          Processors::DeckJs.new(js_options),
         ]
       }[@options[:type]]
     end

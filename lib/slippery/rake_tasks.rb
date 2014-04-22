@@ -19,7 +19,17 @@ module Slippery
           yield self
         end
       end
+
       define
+    end
+
+    def type(type)
+      @options[:type] = type
+    end
+    alias type= type
+
+    def js_options(options)
+      @options.merge!(options)
     end
 
     def presentation_names
@@ -30,7 +40,6 @@ module Slippery
       @infile = infile
       doc = Slippery::Document.new(infile.read)
       doc = Slippery::Presentation.new(doc, @options.merge(options))
-
       doc.process(*processors)
     end
 
@@ -42,17 +51,25 @@ module Slippery
       end
     end
 
-    def include_assets
-      processors << method(:call_asset_packer)
+    def pack_assets
+      @options[:include_assets] = true
     end
-    alias self_contained include_assets
+    alias self_contained pack_assets
 
-    def call_asset_packer(doc)
-      AssetPacker::Processor::Local.new(
-        @infile.to_s,
-        @infile.dirname.join('assets'),
-        @infile
-      ).(doc)
+    def pack_assets?
+      !!@options[:include_assets]
+    end
+
+    def asset_packer
+      if pack_assets?
+        AssetPacker::Processor::Local.new(
+          @infile.to_s,
+          @infile.dirname.join('assets'),
+          @infile
+        )
+      else
+        ->(i) { i }
+      end
     end
 
     def title(title)
@@ -74,42 +91,51 @@ module Slippery
           presentation_names.each do |name, path|
             desc "build #{name}"
             task name do
-              File.write("#{name}.html", markdown_to_hexp(path).to_html)
+              File.write("#{name}.html", asset_packer.((markdown_to_hexp(path))).to_html)
             end
           end
         end
 
         namespace :watch do
           presentation_names.each do |name, path|
-            files = markdown_to_hexp(path, skip_self_contained: true).select('link,script').map {|link| link.attr('href') || link.attr('src')}.compact
-            files = files.select {|f| File.exist?(f)}
 
             desc "watch #{name} for changes"
-            WatchTask.new(name, [path.to_s, *files]) do
-              dest = Tempfile.new("#{name}.html")
-              File.open("#{name}.html", 'w+') { |src| FileUtils.copy_stream(src, dest) }
-              dest.close
-              Rake::Task["#{@name}:build:#{name}"].execute
-              puts "="*60
-              print `diff -u #{dest.path} #{name}.html | cut -c1-150` if File.exist? "#{name}.html"
+            task name do
+              asset_files = markdown_to_hexp(path)
+                .select('link,script')
+                .map {|link| link.attr('href') || link.attr('src')}
+                .compact
+                .select {|uri| URI(uri).scheme == 'file' || URI(uri).scheme == '' || URI(uri).scheme.nil? }
+                .map {|uri| Pathname(URI(uri).path) }
+                .select(&:exist?)
+                .map(&:to_s)
+
+              watch(name, [path.to_s, *asset_files]) do
+                target = Pathname("#{name}.html")
+                before = target.exist? ? target.read : ''
+                Rake::Task["#{@name}:build:#{name}"].execute
+                puts "="*60
+
+                tmpfile = Tempfile.new("#{name}.html")
+                tmpfile << before
+                tmpfile.close
+                print `diff -u #{tmpfile.path} #{name}.html | cut -c1-150`
+              end
             end
           end
         end
       end
     end
-  end
 
+    def watch(name, files, &block)
+      listener = Listen.to('.', :only => /#{files.join('|')}/, &block)
 
-  class WatchTask
-    def initialize(name, files, &block)
-      Rake::Task.define_task name do
-        listener = Listen.to('.', :only => /#{files.join('|')}/, &block)
-
-        at_exit do
-          listener.start # not blocking
-          sleep
-        end
+      at_exit do
+        block.call
+        listener.start # not blocking
+        sleep
       end
     end
   end
+
 end

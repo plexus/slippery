@@ -7,13 +7,14 @@ module Slippery
     def asset_uri(path)
       "file://" + Slippery::ROOT.join('assets', path).to_s
     end
+    module_function :asset_uri
 
     def include_local_javascript(element, path)
-      element.add javascript_include_tag(path)
+      element.add javascript_include_tag(asset_uri(path))
     end
 
     def include_local_css(element, path)
-      element.add stylesheet_link_tag(path)
+      element.add stylesheet_link_tag(asset_uri(path))
     end
 
     def javascript_include_tag(path)
@@ -28,7 +29,19 @@ module Slippery
       Hash[*attrs.flat_map { |k, v| ["data-#{k}", v] }]
     end
 
+    def hash_to_js(hsh)
+      hsh.map { |k, v| "#{k}:#{v.inspect}" }.join(',') #:(
+    end
+
+    def call(doc)
+      doc.process(*self.class.processors.map {|name| send(name) })
+    end
+
     module ClassMethods
+      def processors
+        @processors ||= []
+      end
+
       def processor(name, selector = nil, &blk)
         if selector
           define_method name do
@@ -37,6 +50,7 @@ module Slippery
         else
           define_method name { ->(node) { blk.call(node) } }
         end
+        processors << name
       end
     end
   end

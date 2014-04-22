@@ -27,20 +27,20 @@ module Slippery
         end
 
         processor :add_reveal_js, 'body' do |body|
-          body = include_local_javascript(body, asset_uri('reveal.js/lib/js/head.min.js'))
-          include_local_javascript(body, asset_uri('reveal.js/js/reveal.js'))
+          body = include_local_javascript(body, 'reveal.js/lib/js/head.min.js')
+          include_local_javascript(body, 'reveal.js/js/reveal.js')
         end
 
         processor :add_reveal_css, 'head' do |head|
-          include_local_css(head, asset_uri('reveal.js/css/reveal.min.css'))
+          include_local_css(head, 'reveal.js/css/reveal.min.css')
         end
 
         processor :add_theme, 'head' do |head|
-          include_local_css(head, asset_uri("reveal.js/css/theme/#{@options[:theme]}.css"))
+          include_local_css(head, "reveal.js/css/theme/#{@options[:theme]}.css")
         end
 
         processor :add_settings, 'body' do |body|
-          body.add(H[:script, "Reveal.initialize({ #{plugin_settings}, #{settings.map { |k, v| "#{k}:#{v.inspect}" }.join(',')} });"])
+          body.add(H[:script, "Reveal.initialize({ #{plugin_settings}, #{hash_to_js(settings)} });"])
         end
 
         processor :reveal_wrap, 'body' do |body|

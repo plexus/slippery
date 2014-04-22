@@ -15,12 +15,12 @@ module Slippery
       }.freeze
 
        def initialize(attributes = {})
-         @attributes    = DEFAULT_ATTRS.merge(attributes).freeze
+         @attributes = DEFAULT_ATTRS.merge(attributes).freeze
        end
 
        def call(doc)
          doc.replace('body') do |body|
-           include_local_javascript(body, asset_uri('impress.js/js/impress.js'))
+           include_local_javascript(body, 'impress.js/js/impress.js')
              .set_attrs({id: 'impress'}.merge(data_attributes(attributes)))
              .add H[:script, 'impress().init();']
          end
