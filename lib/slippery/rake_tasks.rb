@@ -88,7 +88,7 @@ module Slippery
             desc "watch #{name} for changes"
             WatchTask.new(name, [path.to_s, *files]) do
               dest = Tempfile.new("#{name}.html")
-              File.open("#{name}.html") { |src| FileUtils.copy_stream(src, dest) }
+              File.open("#{name}.html", 'w+') { |src| FileUtils.copy_stream(src, dest) }
               dest.close
               Rake::Task["#{@name}:build:#{name}"].execute
               puts "="*60
