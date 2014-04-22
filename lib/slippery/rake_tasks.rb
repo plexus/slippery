@@ -1,5 +1,5 @@
 require 'rake/tasklib'
-require 'rb-inotify'
+require 'listen'
 
 module Slippery
   class RakeTasks < Rake::TaskLib
@@ -106,18 +106,13 @@ module Slippery
   class WatchTask
     def initialize(name, files, &block)
       Rake::Task.define_task name do
-        Array(files).each do |pattern|
-          notifier.watch(pattern, :modify, &block)
-        end
+        listener = Listen.to('.', :only => /#{files.join('|')}/, &block)
+
         at_exit do
-          block.call
-          notifier.run
+          listener.start # not blocking
+          sleep
         end
       end
-    end
-
-    def notifier
-      @notifier ||= INotify::Notifier.new
     end
   end
 
