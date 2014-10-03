@@ -117,6 +117,8 @@ end
 
 And the result:
 
+(this is an SVG inside a Markdown file, Github used to do this just fine, but not any more)
+
 <svg width="305pt" height="432pt"
  viewBox="0.00 0.00 305.00 432.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 428)">
