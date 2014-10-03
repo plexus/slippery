@@ -15,7 +15,7 @@ module Slippery
         # css = "http://yandex.st/highlightjs/#{@version}/styles/#{@style}.min.css"
         # js  = "http://yandex.st/highlightjs/#{@version}/highlight.min.js"
 
-        js = asset_uri('highlight.js/highlight-0.8.min.js')
+        js = asset_uri('highlight.js/highlight.pack.js')
         css = asset_uri('highlight.js/highlight-0.8.default.min.css')
 
         doc.rewrite 'head' do |head|

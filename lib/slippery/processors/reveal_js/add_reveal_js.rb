@@ -40,7 +40,7 @@ module Slippery
         end
 
         processor :add_settings, 'body' do |body|
-          body.add(H[:script, "Reveal.initialize({ #{plugin_settings}, #{hash_to_js(settings)} });"])
+          body.add(H[:script, "Reveal.initialize(#{JSON.dump(settings)});"])
         end
 
         processor :reveal_wrap, 'body' do |body|
@@ -53,14 +53,17 @@ module Slippery
         end
 
         def settings
-          @options.reject { |key, _| [:theme, :plugins].include? key }
+          {
+            dependencies: plugin_settings + @options.fetch(:dependencies, [])
+          }.merge(
+            @options.reject { |key, _| [:theme, :plugins, :dependencies].include? key }
+          )
         end
 
         def plugin_settings
-          'dependencies: [' +
           Array(@options.fetch(:plugins, [])).map do |name|
-            plugin_config name
-          end.join(',') + ']'
+            plugin_config(name)
+          end
         end
 
         def plugins(name)

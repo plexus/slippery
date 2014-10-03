@@ -60,12 +60,13 @@ module Slippery
       !!@options[:include_assets]
     end
 
-    def asset_packer
+    def asset_packer(infile)
+      infile = Pathname(infile)
       if pack_assets?
         AssetPacker::Processor::Local.new(
-          @infile.to_s,
-          @infile.dirname.join('assets'),
-          @infile
+          infile.to_s,
+          infile.dirname.join('assets'),
+          infile
         )
       else
         ->(i) { i }
@@ -91,7 +92,7 @@ module Slippery
           presentation_names.each do |name, path|
             desc "build #{name}"
             task name do
-              File.write("#{name}.html", asset_packer.((markdown_to_hexp(path))).to_html)
+              File.write("#{name}.html", asset_packer(path).((markdown_to_hexp(path))).to_html(html5: true))
             end
           end
         end
