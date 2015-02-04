@@ -3,8 +3,7 @@ require 'pathname'
 require 'open-uri'
 require 'forwardable'
 
-require 'kramdown'
-require 'hexp'
+require 'hexp/kramdown'
 require 'concord'
 require 'asset_packer'
 
@@ -18,7 +17,6 @@ module Slippery
 end
 
 require 'slippery/version'
-require 'slippery/converter'
 require 'slippery/document'
 require 'slippery/presentation'
 

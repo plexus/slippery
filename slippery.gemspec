@@ -17,8 +17,9 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- spec`.split($/)
   gem.extra_rdoc_files = %w[README.md LICENSE]
 
-  gem.add_runtime_dependency 'hexp'         , '~> 0.3.3'
+  gem.add_runtime_dependency 'hexp'         , '~> 0.4.0.beta1'
   gem.add_runtime_dependency 'kramdown'     , '~> 1.1'
+  gem.add_runtime_dependency 'hexp-kramdown', '> 0'
   gem.add_runtime_dependency 'rake'         , '~> 10.1'
   gem.add_runtime_dependency 'listen'       , '~> 2.7'
   gem.add_runtime_dependency 'concord'      , '~> 0.1.4'

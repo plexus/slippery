@@ -50,6 +50,7 @@ module Slippery
         end
       end
     end
+    alias replace processor
 
     def pack_assets
       @options[:include_assets] = true
