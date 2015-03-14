@@ -35,27 +35,38 @@ rake slippery:build               # build all
 rake slippery:build:presentation  # build presentation
 ```
 
-
-You can use a block to configure Slippery:
+You can use a block to configure Slippery. If the block takes an
+argument it will receive the slippery config object, otherwise the
+block is instance_evaled in the right scope.
 
 ```ruby
 require 'slippery'
 
-Slippery::RakeTasks.new do |s|
-  s.options = {
-    type: :reveal_js,
-    theme: 'beige',
-    controls: false,
-    backgroundTransition: 'slide',
-    history: true,
-    plugins: [:notes]
-  }
+Slippery::RakeTasks.new do
+  title "Hypermedia in Practice | @plexus"
+  type :reveal_js
+  add_highlighting :default, '8.2'
 
-  s.processor 'head' do |head|
-    head <<= H[:title, 'Web Services, Past Present Future']
+  js_options theme: 'sky', # beige default moon night serif simple sky solarized
+             transition: 'none',
+             backgroundTransition: 'none',
+             width: 1500,  #1680,
+             height: 1000,  #1050
+             loop: true
+
+
+  pack_assets
+
+  processor 'head' do |head|
+    H[:head, head.attributes, head.children + [
+        H[:meta, charset: 'utf-8'],
+        H[:meta, name: 'viewport', content: 'width=1024'],
+        H[:meta, "http-equiv" => 'X-UA-Compatible', content: 'IE=edge,chrome=1'],
+        H[:link, rel: 'stylesheet', type: 'text/css', href: 'style.css'],
+        H[:script, {type: 'text/javascript'}, File.read('ga.js')],
+      ]
+    ]
   end
-
-  s.include_assets
 end
 ```
 
