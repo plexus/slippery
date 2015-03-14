@@ -17,14 +17,14 @@ Gem::Specification.new do |gem|
   gem.test_files       = `git ls-files -- spec`.split($/)
   gem.extra_rdoc_files = %w[README.md LICENSE]
 
-  gem.add_runtime_dependency 'hexp'         , '~> 0.4.0.beta1'
+  gem.add_runtime_dependency 'hexp'         , '~> 0.4.6'
   gem.add_runtime_dependency 'kramdown'     , '~> 1.1'
   gem.add_runtime_dependency 'hexp-kramdown', '> 0'
   gem.add_runtime_dependency 'rake'         , '~> 10.1'
   gem.add_runtime_dependency 'listen'       , '~> 2.7'
   gem.add_runtime_dependency 'concord'      , '~> 0.1.4'
-  gem.add_runtime_dependency 'asset_packer' , '~> 0.1.0'
+  gem.add_runtime_dependency 'asset_packer' , '~> 0.2.0'
 
-  gem.add_development_dependency 'rspec'        , '~> 2.14'
-  gem.add_development_dependency 'mutant-rspec' , '~> 0.5.3'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'mutant-rspec'
 end
