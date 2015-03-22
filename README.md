@@ -10,11 +10,17 @@
 [codeclimate]: https://codeclimate.com/github/plexus/slippery
 [coveralls]: https://coveralls.io/r/plexus/slippery
 
-#Slippery
+# Slippery
 
-Marries the flexible [Kramdown](https://kramdown.rubyforge.org) parser for Markdown with the flexibility of DOM manipulation with [Hexp](https://github.com/plexus/hexp) to generate HTML slides backed by either Reveal.js or Impress.js.
+Create HTML slides from Markdown, backed by Reveal.js, Impress.js, or Deck.js.
 
 Because Slippery slides are the best slides.
+
+When doing conferences you might find yourself on trains, planes, or
+flaky conference wifi. Slippery finds all assets used by your
+presentation and stores them locally, including CSS, Javascript,
+images, and webfonts. You can drop the result on a thumb drive and run
+anywhere, no network required.
 
 ## How to use
 
