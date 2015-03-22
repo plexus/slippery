@@ -1,11 +1,9 @@
 [![Gem Version](https://badge.fury.io/rb/slippery.png)][gem]
-[![Build Status](https://secure.travis-ci.org/plexus/slippery.png?branch=master)][travis]
 [![Dependency Status](https://gemnasium.com/plexus/slippery.png)][gemnasium]
 [![Code Climate](https://codeclimate.com/github/plexus/slippery.png)][codeclimate]
 [![Coverage Status](https://coveralls.io/repos/plexus/slippery/badge.png?branch=master)][coveralls]
 
 [gem]: https://rubygems.org/gems/slippery
-[travis]: https://travis-ci.org/plexus/slippery
 [gemnasium]: https://gemnasium.com/plexus/slippery
 [codeclimate]: https://codeclimate.com/github/plexus/slippery
 [coveralls]: https://coveralls.io/r/plexus/slippery
@@ -21,6 +19,8 @@ flaky conference wifi. Slippery finds all assets used by your
 presentation and stores them locally, including CSS, Javascript,
 images, and webfonts. You can drop the result on a thumb drive and run
 anywhere, no network required.
+
+Here's an [example slide deck](https://github.com/plexus/conf-talks/tree/master/2015-rubyconf-lt-by) (look for `index.md`, `Rakefile`, and `style.css`)
 
 ## How to use
 
