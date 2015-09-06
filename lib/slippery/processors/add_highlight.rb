@@ -12,11 +12,12 @@ module Slippery
       end
 
       def call(doc)
-        # css = "http://yandex.st/highlightjs/#{@version}/styles/#{@style}.min.css"
-        # js  = "http://yandex.st/highlightjs/#{@version}/highlight.min.js"
-
         js = asset_uri('highlight.js/highlight.pack.js')
-        css = asset_uri('highlight.js/highlight-0.8.default.min.css')
+        css = if @style == :default
+          asset_uri('highlight.js/highlight-0.8.default.min.css')
+        else
+          asset_uri("highlight.js/styles/#{@style}.css")
+        end
 
         doc.rewrite 'head' do |head|
           head <<= H[:link, rel: "stylesheet", href: css]
