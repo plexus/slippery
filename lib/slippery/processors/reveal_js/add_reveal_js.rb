@@ -10,7 +10,7 @@ module Slippery
 
         attr_reader :attributes
 
-        DEFAULT_OPTIONS = {theme: 'default'}.freeze
+        DEFAULT_OPTIONS = {theme: 'black'}.freeze
 
         def initialize(options = {})
           @options = DEFAULT_OPTIONS.merge(options).freeze
