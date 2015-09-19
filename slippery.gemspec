@@ -21,7 +21,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'kramdown'     , '~> 1.1'
   gem.add_runtime_dependency 'hexp-kramdown', '> 0'
   gem.add_runtime_dependency 'rake'         , '~> 10.1'
-  gem.add_runtime_dependency 'listen'       , '~> 2.7'
+  gem.add_runtime_dependency 'listen'       , '~> 3.0'
   gem.add_runtime_dependency 'concord'      , '~> 0.1.4'
   gem.add_runtime_dependency 'asset_packer' , '~> 0.3.0'
 
