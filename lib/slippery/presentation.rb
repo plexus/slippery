@@ -32,6 +32,10 @@ module Slippery
           Processors::HrToSections.new(H[:section, class: 'slide']),
           Processors::JQuery.new(js_options),
           Processors::DeckJs.new(js_options),
+        ],
+        shower: [
+          Processors::HrToSections.new(H[:section, class: 'slide']),
+          Processors::Shower.new(js_options),
         ]
       }[@options[:type]]
     end

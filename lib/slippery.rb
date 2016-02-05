@@ -33,6 +33,7 @@ require 'slippery/processors/impress_js/auto_offsets'
 require 'slippery/processors/jquery'
 require 'slippery/processors/fathom_js'
 require 'slippery/processors/deck_js'
+require 'slippery/processors/shower'
 
 require 'slippery/processors/reveal_js/add_reveal_js'
 
