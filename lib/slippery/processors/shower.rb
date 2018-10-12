@@ -36,6 +36,7 @@ module Slippery
           add_shower_css,
           set_body_classes,
           meta_tags,
+          progress_bar,
           header
         )
       end
@@ -60,6 +61,10 @@ module Slippery
 
       processor :set_body_classes, 'body' do |body|
         body.attr('class', 'shower list')
+      end
+
+      processor :progress_bar, 'body' do |body|
+        body.add_child(H[:div, {class: "progress"}])
       end
 
       processor :header, 'section:first-child' do |section|
