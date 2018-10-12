@@ -122,7 +122,11 @@ module Slippery
                 tmpfile = Tempfile.new("#{name}.html")
                 tmpfile << before
                 tmpfile.close
-                print `diff -u #{tmpfile.path} #{name}.html | cut -c1-150`
+                if `which pup` =~ /pup/
+                  print `bash -c 'diff -u <(cat #{tmpfile.path} | pup) <(cat #{name}.html | pup) | cut -c1-180'`
+                else
+                  print `diff -u #{tmpfile.path} #{name}.html | cut -c1-180`
+                end
               end
             end
           end
