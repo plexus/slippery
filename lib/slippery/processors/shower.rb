@@ -10,7 +10,8 @@ module Slippery
       attr_reader :attributes
 
       DEFAULT_OPTIONS = {theme: :material,
-                         ratio: '4x3'
+                         ratio: '4x3',
+                         color_key: '#4caf50'
                         }.freeze
 
       def initialize(options = {})
@@ -22,7 +23,11 @@ module Slippery
       end
 
       def ratio
-        @options[:ratio]
+        @options[:ratio].sub('x', ' / ')
+      end
+
+      def color_key
+        @options[:color_key]
       end
 
       def call(doc)
@@ -30,7 +35,8 @@ module Slippery
           add_shower_js,
           add_shower_css,
           set_body_classes,
-          meta_tags
+          meta_tags,
+          header
         )
       end
 
@@ -38,13 +44,14 @@ module Slippery
         include_local_javascript(body, 'shower/shower.min.js')
       end
 
-
       processor :add_shower_css, 'head' do |head|
-        include_local_css(head, "shower/themes/#{theme}/styles/screen-#{ratio}.css")
+        include_local_css(head, "shower/themes/#{theme}/styles/styles.css")
+          .add_child(H[:style, ".shower {--slide-ratio: calc(#{ratio}); --color-key: #{color_key};} "])
       end
 
       processor :meta_tags, 'head' do |head|
         head
+          .add_child(H[:meta, {"charset" => "utf-8"}])
           .add_child(H[:meta, {"http-equiv" => "x-ua-compatible",
                                "content" => "ie=edge"}])
           .add_child(H[:meta, {"name" => "viewport",
@@ -52,7 +59,11 @@ module Slippery
       end
 
       processor :set_body_classes, 'body' do |body|
-        body.attr('class', 'shower full')
+        body.attr('class', 'shower list')
+      end
+
+      processor :header, 'section:first-child' do |section|
+        section.set_tag(:header).attr('class', 'caption')
       end
 
     end
