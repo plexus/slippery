@@ -81,8 +81,8 @@ module Slippery
       end
     end
 
-    def add_highlighting(style = Slippery::Processors::AddHighlight::DEFAULT_STYLE, version = Slippery::Processors::AddHighlight::DEFAULT_VERSION)
-      processors << Slippery::Processors::AddHighlight.new(style, version)
+    def add_highlighting(style = Slippery::Processors::AddHighlight::DEFAULT_STYLE, version = :unused)
+      processors << Slippery::Processors::AddHighlight.new(style)
     end
 
     def define
